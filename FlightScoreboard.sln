@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightScoreboard", "FlightScoreboard\FlightScoreboard.csproj", "{CAB44C7D-E2A2-421F-B07E-EB828C78B4C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAB44C7D-E2A2-421F-B07E-EB828C78B4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB44C7D-E2A2-421F-B07E-EB828C78B4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB44C7D-E2A2-421F-B07E-EB828C78B4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB44C7D-E2A2-421F-B07E-EB828C78B4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AACA350D-EFAD-413D-B0F0-591173110041}
+	EndGlobalSection
+EndGlobal

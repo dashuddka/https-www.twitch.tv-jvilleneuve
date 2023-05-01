@@ -1,0 +1,111 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:FlightScoreboard.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:FlightScoreboard.Converters"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		Width="800" Height="500"
+        x:Class="FlightScoreboard.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="FlightScoreboard"
+		Background="LightGray">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<Window.Resources>
+		<converters:BoolArrivalConverter x:Key="ArrivalConverter"/>
+		<converters:BoolDepartureConverter x:Key="DepartureConverter"/>
+		<converters:BoolYesterdayConverter x:Key="YesterdayConverter"/>
+		<converters:BoolTodayConverter x:Key="TodayConverter"/>
+		<converters:BoolTomorrowConverter x:Key="TomorrowConverter"/>
+		<converters:BoolToTextConverter x:Key="ToText"/>
+	</Window.Resources>
+
+		<Grid RowDefinitions="50, 20, *">
+			<Grid Grid.Row="0" ColumnDefinitions="152, 150, Auto, Auto, Auto, Auto">
+				<RadioButton Grid.Column="1" IsChecked="{Binding IsArrival}" GroupName="FirstGroup">
+					<RadioButton.Template>
+						<ControlTemplate>
+							<Image Source="{Binding IsArrival, Converter={StaticResource ArrivalConverter}}" Height="50" Width="150"/>
+						</ControlTemplate>
+					</RadioButton.Template>
+				</RadioButton>
+				<RadioButton Grid.Column="0" IsChecked="{Binding IsDeparture}" GroupName="FirstGroup">
+					<RadioButton.Template>
+						<ControlTemplate>
+							<Image Source="{Binding IsDeparture, Converter={StaticResource DepartureConverter}}" Height="50" Width="150"/>
+						</ControlTemplate>
+					</RadioButton.Template>
+				</RadioButton>
+				<Button Grid.Column="2" Background="Transparent" Command="{Binding Refresh}">
+					<Image Source="/Assets/Back.PNG"/>
+				</Button>
+				<RadioButton Grid.Column="3" IsChecked="{Binding IsYesterday}" GroupName="SecondGroup">
+					<RadioButton.Template>
+						<ControlTemplate>
+							<Image Source="{Binding IsYesterday, Converter={StaticResource YesterdayConverter}}" Height="30" Width="70"/>
+						</ControlTemplate>
+					</RadioButton.Template>
+				</RadioButton>
+				<RadioButton Grid.Column="4" IsChecked="{Binding IsToday}" GroupName="SecondGroup">
+					<RadioButton.Template>
+						<ControlTemplate>
+							<Image Source="{Binding IsToday, Converter={StaticResource TodayConverter}}" Height="30" Width="80"/>
+						</ControlTemplate>
+					</RadioButton.Template>
+				</RadioButton>
+				<RadioButton Grid.Column="5" IsChecked="{Binding IsTomorrow}" GroupName="SecondGroup">
+					<RadioButton.Template>
+						<ControlTemplate>
+							<Image Source="{Binding IsTomorrow, Converter={StaticResource TomorrowConverter}}" Height="30" Width="80"/>
+						</ControlTemplate>
+					</RadioButton.Template>
+				</RadioButton>
+			</Grid>
+			<Grid Grid.Row="1" ColumnDefinitions="120, 120, 120, 100, 50, 120">
+				<TextBlock Grid.Column="0" Text="Рейс" HorizontalAlignment="Center"/>
+				<TextBlock Grid.Column="1" Text="{Binding IsDeparture, Converter={StaticResource ToText}}" HorizontalAlignment="Left"/>
+				<TextBlock Grid.Column="2" Text="По расписанию" HorizontalAlignment="Center"/>
+				<TextBlock Grid.Column="3" Text="Расчетное" HorizontalAlignment="Center"/>
+				<TextBlock Grid.Column="4" Text="Сектор" HorizontalAlignment="Center"/>
+				<TextBlock Grid.Column="5" Text="Статус" HorizontalAlignment="Center"/>
+			</Grid>
+			<ListBox Grid.Row="2" Items="{Binding Current}">
+				<ListBox.Styles>
+					<Style Selector="ListBoxItem">
+						<Setter Property="Padding" Value="0"/>
+					</Style>
+				</ListBox.Styles>
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Expander Background="LightGray">
+							<Expander.Header>
+								<Grid ColumnDefinitions="20, 30, 40, 120, 120, 100, 50, 120">
+									<Image Grid.Column="0" Source="{Binding MiniImage}" Height="20" Width="20"/>
+									<TextBlock Grid.Column="1" Text="{Binding Company}" HorizontalAlignment="Right"/>
+									<TextBlock Grid.Column="2" Text="{Binding Number}" HorizontalAlignment="Right"/>
+									<TextBlock Grid.Column="3" Text="{Binding City}" HorizontalAlignment="Left" Margin="10, 0"/>
+									<TextBlock Grid.Column="4" Text="{Binding Schedule}" HorizontalAlignment="Right"/>
+									<TextBlock Grid.Column="5" Text="{Binding Settlement}" HorizontalAlignment="Right"/>
+									<TextBlock Grid.Column="6" Text="{Binding Sector}" HorizontalAlignment="Center"/>
+									<TextBlock Grid.Column="7" Text="{Binding Status}" HorizontalAlignment="Left" Margin="10, 0"/>
+								</Grid>
+							</Expander.Header>
+							<Grid RowDefinitions="30, *">
+								<TextBlock Grid.Row="0" Text="{Binding Way}"/>
+								<Grid Grid.Row="1" ColumnDefinitions="Auto, Auto, Auto">
+									<Image Grid.Column="0" Source="{Binding Image}" Height="64" Width="64"/>
+									<TextBlock Grid.Column="1" Text="{Binding Description1}" Margin="20, 0"/>
+									<TextBlock Grid.Column="2" Text="{Binding Description2}" Margin="20, 0"/>
+								</Grid>
+							</Grid>
+						</Expander>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+
+</Window>
